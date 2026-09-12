@@ -1,0 +1,257 @@
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+.section-label {
+  padding: 0 12px 6px;
+  color: #7fa2d8;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 13px;
+  border-radius: 7px;
+  color: #f4f8ff;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .16s ease;
+}
+.nav-item svg { width: 21px; height: 21px; flex: 0 0 auto; stroke-width: 1.7; color: #dbe9ff; }
+.nav-item:hover { background: rgba(255,255,255,.07); }
+.nav-item.active { background: #246edb; color: #fff; font-weight: 700; }
+.nav-item.active svg { color: #fff; }
+
+.panel {
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  background: #fff;
+  padding: 18px 16px;
+  box-shadow: 0 1px 2px rgba(20,45,82,.02);
+}
+.panel-title {
+  color: #071d43;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 800;
+}
+.panel-subtitle {
+  margin-top: 7px;
+  color: #8497b6;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.stat-card {
+  min-height: 115px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  background: #fff;
+  padding: 19px 16px;
+}
+.stat-title { color: #667da3; font-size: 10px; line-height: 1.2; font-weight: 700; }
+.stat-value { margin-top: 13px; color: #071d43; font-size: 26px; line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+.stat-icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.stat-icon svg { width: 20px; height: 20px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.quick-row {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border: 1px solid #dde5ef;
+  border-radius: 9px;
+  color: #071d43;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: .16s ease;
+}
+.quick-row:hover { background: #fbfcfe; border-color: #ccd7e5; }
+.quick-icon { width: 35px; height: 35px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+.quick-icon svg { width: 18px; height: 18px; }
+
+.sidebar-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.18) transparent; }
+.sidebar-scroll::-webkit-scrollbar { width: 5px; }
+.sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 20px; }
+
+#sidebar.sidebar-hidden { transform: translateX(-100%); }
+#topbar.sidebar-collapsed { left: 0; }
+#main.sidebar-collapsed { margin-left: 0; }
+
+@media (max-width: 1023px) {
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.sidebar-hidden { transform: translateX(0); }
+  #topbar { left: 0; }
+  #main { margin-left: 0; }
+}
+
+
+/* DARK MODE */
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+html.dark body {
+  background: #081426 !important;
+  color: #e6edf8 !important;
+}
+
+html.dark #topbar {
+  background: #0d1b2f !important;
+  border-color: #22324a !important;
+}
+
+html.dark #main,
+html.dark main {
+  background: #081426;
+}
+
+html.dark #sidebar {
+  background: #071a36 !important;
+  border-color: #22324a !important;
+}
+
+html.dark .panel,
+html.dark .stat-card,
+html.dark .login-card {
+  background: #0d1b2f !important;
+  border-color: #22324a !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18);
+}
+
+html.dark .panel-title,
+html.dark .stat-value,
+html.dark .quick-row,
+html.dark .field-label,
+html.dark h1,
+html.dark #operatorLabel,
+html.dark #accountButton,
+html.dark #welcomeName {
+  color: #eef4ff !important;
+}
+
+html.dark .panel-subtitle,
+html.dark .stat-title,
+html.dark #roleSubLabel,
+html.dark p,
+html.dark .text-\[\#7c90b1\] {
+  color: #93a4bd !important;
+}
+
+html.dark .quick-row {
+  background: #0f2037;
+  border-color: #263852;
+}
+html.dark .quick-row:hover {
+  background: #132741;
+  border-color: #355071;
+}
+
+html.dark table thead tr {
+  background: #12233a !important;
+  color: #9fb1ca !important;
+}
+html.dark table tbody,
+html.dark table tbody tr,
+html.dark table tbody td {
+  color: #c8d4e5 !important;
+  border-color: #22324a !important;
+}
+html.dark table tbody td.font-extrabold {
+  color: #eef4ff !important;
+}
+
+html.dark .divide-y > :not([hidden]) ~ :not([hidden]) {
+  border-color: #22324a !important;
+}
+
+html.dark #accountMenu {
+  background: #0d1b2f !important;
+  border-color: #263852 !important;
+  color: #e6edf8 !important;
+}
+html.dark #accountMenu > div {
+  border-color: #22324a !important;
+}
+html.dark #accountMenu .text-\[\#081e43\] {
+  color: #eef4ff !important;
+}
+
+html.dark #sidebarToggle,
+html.dark .theme-toggle,
+html.dark .notification-button,
+html.dark #accountButton,
+html.dark .hidden.xl\:flex {
+  background: #0f2037 !important;
+  border-color: #2b3d57 !important;
+  color: #d9e5f6 !important;
+}
+
+html.dark .theme-toggle:hover,
+html.dark #sidebarToggle:hover,
+html.dark .notification-button:hover {
+  background: #152943 !important;
+}
+
+html.dark .form-control {
+  background: #0a1729 !important;
+  border-color: #2a3c57 !important;
+  color: #eef4ff !important;
+}
+html.dark .form-control::placeholder { color: #6f819c; }
+html.dark .form-control:focus {
+  border-color: #4a8cf0 !important;
+  box-shadow: 0 0 0 3px rgba(74,140,240,.15);
+}
+html.dark .form-control option {
+  background: #0d1b2f;
+  color: #eef4ff;
+}
+
+html.dark .login-btn {
+  background: #2f78e5;
+}
+html.dark .login-btn:hover { background: #3c86ef; }
+
+html.dark .login-card h1 { color: #f3f7ff !important; }
+html.dark .login-card p { color: #94a7c2 !important; }
+
+html.dark footer img,
+html.dark .login-card img[alt="SIGMA"] {
+  filter: brightness(.96) contrast(1.02);
+}
+
+html.dark .bg-white { background-color: #0d1b2f !important; }
+html.dark .border-\[\#dce4ef\],
+html.dark .border-\[\#e0e7f1\] { border-color: #2a3c57 !important; }
+html.dark .text-\[\#081e43\],
+html.dark .text-\[\#071d43\],
+html.dark .text-\[\#0b2553\] { color: #eef4ff !important; }
+html.dark .text-\[\#7487a8\],
+html.dark .text-\[\#93a3bd\] { color: #91a4bf !important; }

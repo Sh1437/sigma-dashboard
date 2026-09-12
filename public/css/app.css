@@ -1,0 +1,798 @@
+
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body { font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+
+.section-label {
+  padding: 0 12px 6px;
+  color: #7fa2d8;
+  font-size: 8px;
+  line-height: 1;
+  font-weight: 800;
+  letter-spacing: .12em;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 40px;
+  padding: 0 13px;
+  border-radius: 7px;
+  color: #f4f8ff;
+  font-size: 11px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: .16s ease;
+}
+.nav-item svg { width: 21px; height: 21px; flex: 0 0 auto; stroke-width: 1.7; color: #dbe9ff; }
+.nav-item:hover { background: rgba(255,255,255,.07); }
+.nav-item.active { background: #246edb; color: #fff; font-weight: 700; }
+.nav-item.active svg { color: #fff; }
+
+.panel {
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  background: #fff;
+  padding: 18px 16px;
+  box-shadow: 0 1px 2px rgba(20,45,82,.02);
+}
+.panel-title {
+  color: #071d43;
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 800;
+}
+.panel-subtitle {
+  margin-top: 7px;
+  color: #8497b6;
+  font-size: 11px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.stat-card {
+  min-height: 115px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border: 1px solid #dce5f0;
+  border-radius: 12px;
+  background: #fff;
+  padding: 19px 16px;
+}
+.stat-title { color: #667da3; font-size: 10px; line-height: 1.2; font-weight: 700; }
+.stat-value { margin-top: 13px; color: #071d43; font-size: 26px; line-height: 1; font-weight: 800; letter-spacing: -.035em; }
+.stat-icon { width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+.stat-icon svg { width: 20px; height: 20px; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 20px;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 800;
+}
+
+.quick-row {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border: 1px solid #dde5ef;
+  border-radius: 9px;
+  color: #071d43;
+  font-size: 11px;
+  font-weight: 800;
+  text-decoration: none;
+  transition: .16s ease;
+}
+.quick-row:hover { background: #fbfcfe; border-color: #ccd7e5; }
+.quick-icon { width: 35px; height: 35px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+.quick-icon svg { width: 18px; height: 18px; }
+
+.sidebar-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,255,255,.18) transparent; }
+.sidebar-scroll::-webkit-scrollbar { width: 5px; }
+.sidebar-scroll::-webkit-scrollbar-track { background: transparent; }
+.sidebar-scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.18); border-radius: 20px; }
+
+/* Desktop collapse is handled by .sidebar-collapsed rules below. */
+
+@media (max-width: 1023px) {
+  #sidebar { transform: translateX(-100%); }
+  #sidebar.sidebar-open { transform: translateX(0); }
+  #topbar { left: 0; }
+  #main { margin-left: 0; }
+}
+
+
+/* DARK MODE */
+html { color-scheme: light; }
+html.dark { color-scheme: dark; }
+
+html.dark body {
+  background: #081426 !important;
+  color: #e6edf8 !important;
+}
+
+html.dark #topbar {
+  background: #0d1b2f !important;
+  border-color: #22324a !important;
+}
+
+html.dark #main,
+html.dark main {
+  background: #081426;
+}
+
+html.dark #sidebar {
+  background: #071a36 !important;
+  border-color: #22324a !important;
+}
+
+html.dark .panel,
+html.dark .stat-card,
+html.dark .login-card {
+  background: #0d1b2f !important;
+  border-color: #22324a !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,.18);
+}
+
+html.dark .panel-title,
+html.dark .stat-value,
+html.dark .quick-row,
+html.dark .field-label,
+html.dark h1,
+html.dark #operatorLabel,
+html.dark #accountButton,
+html.dark #welcomeName {
+  color: #eef4ff !important;
+}
+
+html.dark .panel-subtitle,
+html.dark .stat-title,
+html.dark #roleSubLabel,
+html.dark p,
+html.dark .text-\[\#7c90b1\] {
+  color: #93a4bd !important;
+}
+
+html.dark .quick-row {
+  background: #0f2037;
+  border-color: #263852;
+}
+html.dark .quick-row:hover {
+  background: #132741;
+  border-color: #355071;
+}
+
+html.dark table thead tr {
+  background: #12233a !important;
+  color: #9fb1ca !important;
+}
+html.dark table tbody,
+html.dark table tbody tr,
+html.dark table tbody td {
+  color: #c8d4e5 !important;
+  border-color: #22324a !important;
+}
+html.dark table tbody td.font-extrabold {
+  color: #eef4ff !important;
+}
+
+html.dark .divide-y > :not([hidden]) ~ :not([hidden]) {
+  border-color: #22324a !important;
+}
+
+html.dark #accountMenu {
+  background: #0d1b2f !important;
+  border-color: #263852 !important;
+  color: #e6edf8 !important;
+}
+html.dark #accountMenu > div {
+  border-color: #22324a !important;
+}
+html.dark #accountMenu .text-\[\#081e43\] {
+  color: #eef4ff !important;
+}
+
+html.dark #sidebarToggle,
+html.dark .theme-toggle,
+html.dark .notification-button,
+html.dark #accountButton,
+html.dark .hidden.xl\:flex {
+  background: #0f2037 !important;
+  border-color: #2b3d57 !important;
+  color: #d9e5f6 !important;
+}
+
+html.dark .theme-toggle:hover,
+html.dark #sidebarToggle:hover,
+html.dark .notification-button:hover {
+  background: #152943 !important;
+}
+
+html.dark .form-control {
+  background: #0a1729 !important;
+  border-color: #2a3c57 !important;
+  color: #eef4ff !important;
+}
+html.dark .form-control::placeholder { color: #6f819c; }
+html.dark .form-control:focus {
+  border-color: #4a8cf0 !important;
+  box-shadow: 0 0 0 3px rgba(74,140,240,.15);
+}
+html.dark .form-control option {
+  background: #0d1b2f;
+  color: #eef4ff;
+}
+
+html.dark .login-btn {
+  background: #2f78e5;
+}
+html.dark .login-btn:hover { background: #3c86ef; }
+
+html.dark .login-card h1 { color: #f3f7ff !important; }
+html.dark .login-card p { color: #94a7c2 !important; }
+
+html.dark footer img,
+html.dark .login-card img[alt="SIGMA"] {
+  filter: brightness(.96) contrast(1.02);
+}
+
+html.dark .bg-white { background-color: #0d1b2f !important; }
+html.dark .border-\[\#dce4ef\],
+html.dark .border-\[\#e0e7f1\] { border-color: #2a3c57 !important; }
+html.dark .text-\[\#081e43\],
+html.dark .text-\[\#071d43\],
+html.dark .text-\[\#0b2553\] { color: #eef4ff !important; }
+html.dark .text-\[\#7487a8\],
+html.dark .text-\[\#93a3bd\] { color: #91a4bf !important; }
+
+/* =========================================================
+   SIDEBAR COLLAPSE - compact icon mode
+   ========================================================= */
+
+/* Brand area: full logo in normal mode, compact mark when collapsed. */
+.sigma-brand-area {
+  height: 78px;
+  padding: 7px 13px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sigma-brand-full {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #ffffff !important;
+  border: 1px solid rgba(219, 227, 239, .95);
+}
+
+.sigma-brand-full-logo {
+  width: 206px;
+  height: 50px;
+  max-width: calc(100% - 20px);
+  object-fit: contain;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.sigma-brand-icon {
+  display: none;
+  width: 48px;
+  height: 48px;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: #ffffff !important;
+  border: 1px solid rgba(219, 227, 239, .95);
+}
+
+.sigma-brand-icon-logo {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background: #ffffff !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Desktop compact sidebar. */
+@media (min-width: 1024px) {
+  #sidebar.sidebar-collapsed {
+    width: 76px !important;
+    transform: translateX(0) !important;
+  }
+
+  #sidebar.sidebar-collapsed .sigma-brand-area {
+    padding: 8px 10px;
+  }
+
+  #sidebar.sidebar-collapsed .sigma-brand-full {
+    display: none;
+  }
+
+  #sidebar.sidebar-collapsed .sigma-brand-icon {
+    display: flex;
+  }
+
+  #sidebar.sidebar-collapsed nav {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+  }
+
+  #sidebar.sidebar-collapsed .section-label {
+    display: none;
+  }
+
+  #sidebar.sidebar-collapsed .nav-item {
+    width: 56px;
+    height: 46px;
+    margin: 6px 0;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+    border-radius: 9px;
+  }
+
+  #sidebar.sidebar-collapsed .nav-item span {
+    display: none;
+  }
+
+  #sidebar.sidebar-collapsed .nav-item svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  #topbar.sidebar-collapsed {
+    left: 76px !important;
+  }
+
+  #main.sidebar-collapsed {
+    margin-left: 76px !important;
+  }
+}
+
+/* Keep the brand shape identical in dark mode. */
+html.dark .sigma-brand-full,
+html.dark .sigma-brand-icon {
+  background: #ffffff !important;
+  border-color: rgba(219, 227, 239, .95) !important;
+  box-shadow: none !important;
+}
+
+html.dark .sigma-brand-full-logo,
+html.dark .sigma-brand-icon-logo {
+  background: transparent !important;
+  filter: none !important;
+}
+
+/* Account / profile dropdown */
+.account-menu-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 9px;
+  border-radius: 7px;
+  padding: 9px 10px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  color: #17345f;
+  transition: background-color .18s ease, color .18s ease;
+}
+.account-menu-item:hover {
+  background: #f3f7fc;
+  color: #0b2553;
+}
+.account-menu-logout {
+  color: #dc2626;
+}
+.account-menu-logout:hover {
+  background: #fff1f2;
+  color: #b91c1c;
+}
+html.dark .account-menu-item {
+  color: #dce7f7;
+}
+html.dark .account-menu-item:hover {
+  background: #152943;
+  color: #ffffff;
+}
+html.dark .account-menu-logout {
+  color: #f87171;
+}
+html.dark .account-menu-logout:hover {
+  background: rgba(127, 29, 29, .24);
+  color: #fca5a5;
+}
+html.dark #accountMenu .border-t {
+  border-color: #22324a !important;
+}
+
+/* =========================================================
+   PROFILE PILL + DROPDOWN FIX
+   ========================================================= */
+.profile-pill {
+  min-width: 150px;
+  height: 44px;
+  padding: 5px 10px 5px 7px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  border: 1px solid #dce4ef;
+  border-radius: 14px;
+  background: #ffffff;
+  color: #0b2553;
+  cursor: pointer;
+  transition: background-color .18s ease, border-color .18s ease, box-shadow .18s ease;
+}
+.profile-pill:hover,
+.profile-pill[aria-expanded="true"] {
+  background: #f8fbff;
+  border-color: #cbd8e9;
+  box-shadow: 0 4px 14px rgba(15, 35, 70, .08);
+}
+.profile-pill-avatar {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: #edf5ff;
+  color: #246edb;
+}
+.profile-pill-chevron {
+  flex: 0 0 auto;
+  color: #7185a5;
+  transition: transform .18s ease;
+}
+.profile-pill[aria-expanded="true"] .profile-pill-chevron {
+  transform: rotate(180deg);
+}
+
+html.dark .profile-pill {
+  background: #0f2037 !important;
+  border-color: #2b3d57 !important;
+  color: #e8f0fb !important;
+}
+html.dark .profile-pill:hover,
+html.dark .profile-pill[aria-expanded="true"] {
+  background: #152943 !important;
+  border-color: #3a5272 !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, .2);
+}
+html.dark .profile-pill-avatar {
+  background: #17345b;
+  color: #7db2ff;
+}
+html.dark .profile-pill #operatorLabel {
+  color: #eef4ff !important;
+}
+html.dark .profile-pill #roleSubLabel,
+html.dark .profile-pill-chevron {
+  color: #9eb0c9 !important;
+}
+
+/* =========================================================
+   SIGMA LOGIN SUCCESS - TRUCK ANIMATION
+   ========================================================= */
+.login-success-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(243, 247, 253, .94);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .22s ease, visibility .22s ease;
+}
+
+.login-success-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.login-loader-card {
+    width: min(440px, calc(100vw - 32px));
+    border: 1px solid #dce5f0;
+    border-radius: 18px;
+    background: #fff;
+    padding: 30px 28px 28px;
+    box-shadow: 0 24px 70px rgba(12, 37, 78, .14);
+    text-align: center;
+    transform: translateY(10px) scale(.985);
+    transition: transform .28s ease;
+}
+
+.login-success-overlay.is-active .login-loader-card {
+    transform: translateY(0) scale(1);
+}
+
+.truck-stage {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f5f9ff 0%, #eef5ff 68%, #e7eef8 68%, #e7eef8 100%);
+}
+
+.sigma-truck {
+    position: absolute;
+    left: 50%;
+    bottom: 28px;
+    width: 230px;
+    height: 94px;
+    transform: translateX(-50%);
+    animation: sigmaTruckRide .62s ease-in-out infinite alternate;
+}
+
+.truck-box {
+    position: absolute;
+    left: 6px;
+    bottom: 24px;
+    width: 142px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #dbe6f5;
+    border-radius: 10px 6px 6px 10px;
+    background: #fff;
+    box-shadow: 0 7px 15px rgba(26, 62, 112, .10);
+}
+
+.truck-box-logo {
+    width: 110px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.truck-cab {
+    position: absolute;
+    right: 13px;
+    bottom: 24px;
+    width: 73px;
+    height: 57px;
+    border-radius: 8px 15px 7px 5px;
+    background: #246edb;
+    box-shadow: inset 0 -8px 0 rgba(0, 0, 0, .06);
+}
+
+.truck-cab::before {
+    content: '';
+    position: absolute;
+    left: -14px;
+    bottom: 0;
+    width: 19px;
+    height: 45px;
+    background: #246edb;
+    border-radius: 5px 0 0 4px;
+}
+
+.truck-window {
+    position: absolute;
+    top: 8px;
+    left: 10px;
+    width: 37px;
+    height: 20px;
+    border-radius: 5px 10px 4px 4px;
+    background: #dff4ff;
+    border: 2px solid rgba(255,255,255,.55);
+}
+
+.truck-light {
+    position: absolute;
+    right: 3px;
+    bottom: 15px;
+    width: 6px;
+    height: 8px;
+    border-radius: 3px;
+    background: #ffd76b;
+    box-shadow: 7px 0 15px rgba(255, 215, 107, .75);
+}
+
+.truck-bumper {
+    position: absolute;
+    right: 5px;
+    bottom: 20px;
+    width: 22px;
+    height: 6px;
+    border-radius: 4px;
+    background: #18365f;
+}
+
+.truck-wheel {
+    position: absolute;
+    bottom: 9px;
+    width: 31px;
+    height: 31px;
+    border: 6px solid #10284b;
+    border-radius: 50%;
+    background: #fff;
+    animation: sigmaWheelSpin .52s linear infinite;
+}
+
+.truck-wheel span {
+    position: absolute;
+    inset: 5px;
+    border: 2px solid #8aa4c9;
+    border-radius: 50%;
+}
+
+.truck-wheel span::before,
+.truck-wheel span::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 2px;
+    height: 17px;
+    background: #8aa4c9;
+    transform: translate(-50%, -50%);
+}
+
+.truck-wheel span::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.truck-wheel-left { left: 38px; }
+.truck-wheel-right { right: 29px; }
+
+.road {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18px;
+    height: 4px;
+    overflow: hidden;
+}
+
+.road span {
+    position: absolute;
+    top: 0;
+    width: 58px;
+    height: 4px;
+    border-radius: 10px;
+    background: #a9b9cf;
+    animation: sigmaRoadMove .82s linear infinite;
+}
+.road span:nth-child(1) { left: 0; }
+.road span:nth-child(2) { left: 92px; }
+.road span:nth-child(3) { left: 184px; }
+.road span:nth-child(4) { left: 276px; }
+.road span:nth-child(5) { left: 368px; }
+
+.speed-line {
+    position: absolute;
+    right: -70px;
+    height: 3px;
+    border-radius: 10px;
+    background: rgba(36, 110, 219, .25);
+    animation: sigmaSpeedLine 1.05s linear infinite;
+}
+.speed-line-1 { top: 35px; width: 78px; animation-delay: -.15s; }
+.speed-line-2 { top: 60px; width: 48px; animation-delay: -.55s; }
+.speed-line-3 { top: 86px; width: 105px; animation-delay: -.78s; }
+
+.login-loader-copy h2 {
+    margin-top: 23px;
+    color: #071d43;
+    font-size: 20px;
+    line-height: 1.2;
+    font-weight: 800;
+}
+
+.login-loader-copy p {
+    margin-top: 7px;
+    color: #7387aa;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.login-progress {
+    width: 100%;
+    height: 5px;
+    margin-top: 22px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: #e8eef7;
+}
+
+.login-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: #246edb;
+}
+
+.login-success-overlay.is-active .login-progress span {
+    animation: sigmaLoginProgress 3s linear forwards;
+}
+
+.login-btn.is-loading {
+    cursor: wait;
+    opacity: .78;
+}
+
+html.dark .login-success-overlay {
+    background: rgba(5, 18, 38, .94);
+}
+html.dark .login-loader-card {
+    border-color: #29405f;
+    background: #0e2038;
+    box-shadow: 0 24px 70px rgba(0,0,0,.35);
+}
+html.dark .truck-stage {
+    background: linear-gradient(180deg, #102641 0%, #102641 68%, #152c49 68%, #152c49 100%);
+}
+html.dark .truck-box {
+    border-color: #344d70;
+    background: #fff;
+}
+html.dark .login-loader-copy h2 { color: #f5f8fd; }
+html.dark .login-loader-copy p { color: #9bb0cf; }
+html.dark .login-progress { background: #263b59; }
+
+@keyframes sigmaTruckRide {
+    from { transform: translateX(-50%) translateY(0) rotate(-.25deg); }
+    to   { transform: translateX(-50%) translateY(-3px) rotate(.25deg); }
+}
+
+@keyframes sigmaWheelSpin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes sigmaRoadMove {
+    from { transform: translateX(0); }
+    to { transform: translateX(-92px); }
+}
+
+@keyframes sigmaSpeedLine {
+    from { transform: translateX(0); opacity: 0; }
+    20% { opacity: 1; }
+    to { transform: translateX(-520px); opacity: 0; }
+}
+
+@keyframes sigmaLoginProgress {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sigma-truck,
+    .truck-wheel,
+    .road span,
+    .speed-line,
+    .login-success-overlay.is-active .login-progress span {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

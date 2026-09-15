@@ -50,11 +50,35 @@
     <aside id="sidebar" class="fixed inset-y-0 left-0 z-40 w-[258px] bg-[#0b2553] text-white transition-all duration-300">
       <div class="sigma-brand-area border-b border-white/10">
         <div class="sigma-brand-full">
-          <img src="{{ asset('images/sigma-logo.png') }}" alt="SIGMA" class="sigma-brand-full-logo" />
+          {{-- Logo Light Mode --}}
+          <img
+            src="{{ asset('images/sigma-logo.png') }}"
+            alt="SIGMA"
+            class="sigma-brand-full-logo sigma-dashboard-logo-light"
+          />
+
+          {{-- Logo Dark Mode --}}
+          <img
+            src="{{ asset('images/sigma-logo-dark.png') }}"
+            alt="SIGMA"
+            class="sigma-brand-full-logo sigma-dashboard-logo-dark"
+          />
         </div>
 
         <div class="sigma-brand-icon" aria-hidden="true">
-          <img src="{{ asset('images/sigma-logo-icon.png') }}" alt="" class="sigma-brand-icon-logo" />
+          {{-- Compact icon untuk Light Mode --}}
+          <img
+            src="{{ asset('images/sigma-logo-icon.png') }}"
+            alt=""
+            class="sigma-brand-icon-logo sigma-sidebar-icon-light"
+          />
+
+          {{-- Compact icon khusus Dark Mode --}}
+          <img
+            src="{{ asset('images/dark-icon.png') }}"
+            alt=""
+            class="sigma-brand-icon-logo sigma-sidebar-icon-dark"
+          />
         </div>
       </div>
 

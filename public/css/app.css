@@ -240,8 +240,7 @@ html.dark .login-btn:hover { background: #3c86ef; }
 html.dark .login-card h1 { color: #f3f7ff !important; }
 html.dark .login-card p { color: #94a7c2 !important; }
 
-html.dark footer img,
-html.dark .login-card img[alt="SIGMA"] {
+html.dark footer img {
   filter: brightness(.96) contrast(1.02);
 }
 
@@ -260,8 +259,10 @@ html.dark .text-\[\#93a3bd\] { color: #91a4bf !important; }
 
 /* Brand area: full logo in normal mode, compact mark when collapsed. */
 .sigma-brand-area {
-  height: 78px;
-  padding: 7px 13px 8px;
+  /* Samakan tinggi area logo dengan topbar (h-[64px]) agar garis bawah sejajar. */
+  height: 64px;
+  min-height: 64px;
+  padding: 5px 13px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -321,7 +322,9 @@ html.dark .text-\[\#93a3bd\] { color: #91a4bf !important; }
   }
 
   #sidebar.sidebar-collapsed .sigma-brand-area {
-    padding: 8px 10px;
+    height: 64px;
+    min-height: 64px;
+    padding: 6px 10px;
   }
 
   #sidebar.sidebar-collapsed .sigma-brand-full {
@@ -795,4 +798,128 @@ html.dark .login-progress { background: #263b59; }
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
     }
+}
+
+/* =========================================================
+   SIGMA LOGO - LIGHT / DARK MODE
+   Both source images render inside the exact same CSS box.
+   sigma-logo.png      : 2048 x 658
+   sigma-logo-dark.png : 2048 x 682
+   ========================================================= */
+
+/* Dashboard logo swap */
+.sigma-dashboard-logo-light {
+  display: block !important;
+}
+
+.sigma-dashboard-logo-dark {
+  display: none !important;
+}
+
+html.dark .sigma-dashboard-logo-light {
+  display: none !important;
+}
+
+html.dark .sigma-dashboard-logo-dark {
+  display: block !important;
+}
+
+/* Dashboard: identical render box in both themes */
+.sigma-dashboard-logo-light,
+.sigma-dashboard-logo-dark {
+  width: 206px !important;
+  height: 50px !important;
+  max-width: calc(100% - 20px) !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+/* Dark asset is transparent, so remove the white light-mode plate. */
+html.dark .sigma-brand-full {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.dark .sigma-dashboard-logo-dark {
+  background: transparent !important;
+  filter: none !important;
+}
+
+/* Login logo swap */
+.sigma-login-logo-light {
+  display: block !important;
+}
+
+.sigma-login-logo-dark {
+  display: none !important;
+}
+
+html.dark .sigma-login-logo-light {
+  display: none !important;
+}
+
+html.dark .sigma-login-logo-dark {
+  display: block !important;
+}
+
+/* Login: identical render box in both themes */
+.sigma-login-logo-light,
+.sigma-login-logo-dark {
+  width: 220px !important;
+  height: 58px !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+html.dark .sigma-login-logo-dark {
+  background: transparent !important;
+  filter: none !important;
+}
+
+/* =========================================================
+   COLLAPSED SIDEBAR ICON - LIGHT / DARK MODE
+   Light Mode : sigma-logo-icon.png
+   Dark Mode  : dark-icon.png
+   ========================================================= */
+.sigma-sidebar-icon-light {
+  display: block !important;
+}
+
+.sigma-sidebar-icon-dark {
+  display: none !important;
+}
+
+html.dark .sigma-sidebar-icon-light {
+  display: none !important;
+}
+
+html.dark .sigma-sidebar-icon-dark {
+  display: block !important;
+}
+
+/* dark-icon.png sudah transparan, jadi hilangkan kotak putih
+   hanya ketika sidebar collapsed dan Dark Mode aktif. */
+html.dark #sidebar.sidebar-collapsed .sigma-brand-icon {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+html.dark #sidebar.sidebar-collapsed .sigma-sidebar-icon-dark {
+  width: 44px !important;
+  height: 44px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
 }

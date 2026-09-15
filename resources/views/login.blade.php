@@ -114,7 +114,17 @@
 
     <section class="login-card">
       <div class="flex justify-center">
-        <img src="{{ asset('images/sigma-logo.png') }}" alt="SIGMA" class="h-[58px] w-[220px] object-contain" />
+        <!-- Light dan dark logo memakai bounding box CSS yang sama -->
+        <img
+          src="{{ asset('images/sigma-logo.png') }}"
+          alt="SIGMA"
+          class="sigma-login-logo-light"
+        />
+        <img
+          src="{{ asset('images/sigma-logo-dark.png') }}"
+          alt="SIGMA"
+          class="sigma-login-logo-dark"
+        />
       </div>
 
       <div class="mt-[32px] text-center">

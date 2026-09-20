@@ -207,7 +207,7 @@
             <select id="roleStatus" name="status" class="form-control h-[36px] w-full rounded-[7px] border border-[#d7e0ec] bg-white px-3 text-[11px] font-medium text-[#526987] outline-none sm:w-[150px]">
               <option value="">Semua Status</option>
               <option value="Active" @selected($filters['status'] === 'Active')>Active</option>
-              <option value="Pending" @selected($filters['status'] === 'Pending')>Pending</option>
+              <option value="Nonactive" @selected($filters['status'] === 'Nonactive')>Nonactive</option>
             </select>
 
             <select id="roleType" name="role" class="form-control h-[36px] w-full rounded-[7px] border border-[#d7e0ec] bg-white px-3 text-[11px] font-medium text-[#526987] outline-none sm:w-[170px]">
@@ -239,7 +239,15 @@
                     <td class="px-[12px] font-semibold">{{ $user['role'] }}</td>
                     <td class="px-[12px]">{{ $user['gate'] }}</td>
                     <td class="px-[12px]">
-                      <span class="badge {{ $user['status'] === 'Active' ? 'bg-[#dff3ff] text-[#0575a8]' : 'bg-[#fff0d9] text-[#e46a00]' }}">{{ strtoupper($user['status']) }}</span>
+                      <form method="POST" action="{{ route('role-access.status', $user['identity']) }}" class="inline-flex items-center gap-2">
+                        @csrf
+                        @method('PATCH')
+                        <input type="hidden" name="status" value="{{ $user['status'] === 'Active' ? 'Nonactive' : 'Active' }}">
+                        <button type="submit" role="switch" aria-checked="{{ $user['status'] === 'Active' ? 'true' : 'false' }}" aria-label="Ubah status {{ $user['name'] }}" class="relative inline-flex h-[24px] w-[44px] shrink-0 items-center rounded-full border transition {{ $user['status'] === 'Active' ? 'border-[#246edb] bg-[#246edb]' : 'border-[#cbd5e1] bg-[#cbd5e1]' }}">
+                          <span class="inline-block h-[18px] w-[18px] rounded-full bg-white shadow-sm transition-transform {{ $user['status'] === 'Active' ? 'translate-x-[22px]' : 'translate-x-[3px]' }}"></span>
+                        </button>
+                        <span class="min-w-[58px] text-[10px] font-extrabold {{ $user['status'] === 'Active' ? 'text-[#246edb]' : 'text-[#7c90b1]' }}">{{ $user['status'] === 'Active' ? 'Active' : 'Nonactive' }}</span>
+                      </form>
                     </td>
                     <td class="px-[12px]">
                       <button type="button" class="role-detail-btn rounded-[7px] border border-[#d5dfec] px-3 py-2 text-[10px] font-extrabold text-[#0b2553] hover:bg-[#f7f9fc]" data-user='@json($user)'>Detail</button>

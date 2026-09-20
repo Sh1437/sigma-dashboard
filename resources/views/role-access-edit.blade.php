@@ -192,7 +192,7 @@
           <div class="role-access-card rounded-[14px] border border-[#dce5f0] bg-white p-6 shadow-sm">
             <div class="border-b border-[#e6ecf4] pb-5">
               <h1 class="role-page-title text-[22px] font-extrabold text-[#071d43]">Ubah Data Role/Access</h1>
-              <p class="role-page-subtitle mt-1 text-[11px] text-[#7c90b1]">Perbarui identitas, role, gate, atau status access.</p>
+              <p class="role-page-subtitle mt-1 text-[11px] text-[#7c90b1]">Perbarui identitas, role, atau gate access. Status dikelola dari halaman utama.</p>
             </div>
             @if ($errors->any())
               <div class="mt-5 rounded-[9px] border border-red-200 bg-red-50 p-3 text-[11px] text-red-700">{{ $errors->first() }}</div>
@@ -214,12 +214,6 @@
               <label class="text-[10px] font-extrabold text-[#526987]">Gate
                 <select id="accessGate" name="gate" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
                   @foreach(['All Gate','Gate 1','Gate 2','Gate 3'] as $gate)<option value="{{ $gate }}" @selected(old('gate', $user['gate']) === $gate)>{{ $gate }}</option>@endforeach
-                </select>
-              </label>
-              <label class="text-[10px] font-extrabold text-[#526987] md:col-span-2">Status
-                <select name="status" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
-                  <option value="Active" @selected(old('status', $user['status']) === 'Active')>Active</option>
-                  <option value="Pending" @selected(old('status', $user['status']) === 'Pending')>Pending</option>
                 </select>
               </label>
               <div class="flex justify-end gap-3 border-t border-[#e6ecf4] pt-5 md:col-span-2">

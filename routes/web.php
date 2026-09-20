@@ -19,6 +19,7 @@ Route::get('/role-access-management/create', [RoleAccessController::class, 'crea
 Route::post('/role-access-management', [RoleAccessController::class, 'store'])->name('role-access.store');
 Route::get('/role-access-management/{identity}/edit', [RoleAccessController::class, 'edit'])->name('role-access.edit');
 Route::put('/role-access-management/{identity}', [RoleAccessController::class, 'update'])->name('role-access.update');
+Route::patch('/role-access-management/{identity}/status', [RoleAccessController::class, 'updateStatus'])->name('role-access.status');
 Route::delete('/role-access-management/{identity}', [RoleAccessController::class, 'destroy'])->name('role-access.destroy');
 
 

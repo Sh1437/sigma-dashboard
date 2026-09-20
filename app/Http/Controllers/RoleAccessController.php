@@ -15,10 +15,10 @@ class RoleAccessController extends Controller
         return [
             ['name'=>'Ahmad Pratama','identity'=>'ADM-001','role'=>'Super Admin','gate'=>'All Gate','status'=>'Active'],
             ['name'=>'Rizky Maulana','identity'=>'G1-001','role'=>'Admin Gate 1','gate'=>'Gate 1','status'=>'Active'],
-            ['name'=>'Siti Rahma','identity'=>'G2-001','role'=>'Admin Gate 2','gate'=>'Gate 2','status'=>'Pending'],
+            ['name'=>'Siti Rahma','identity'=>'G2-001','role'=>'Admin Gate 2','gate'=>'Gate 2','status'=>'Nonactive'],
             ['name'=>'Dimas Saputra','identity'=>'G3-001','role'=>'Admin Gate 3','gate'=>'Gate 3','status'=>'Active'],
             ['name'=>'Budi Santoso','identity'=>'USR-001','role'=>'User','gate'=>'Gate 1','status'=>'Active'],
-            ['name'=>'Nadia Putri','identity'=>'USR-002','role'=>'User','gate'=>'Gate 2','status'=>'Pending'],
+            ['name'=>'Nadia Putri','identity'=>'USR-002','role'=>'User','gate'=>'Gate 2','status'=>'Nonactive'],
         ];
     }
 
@@ -47,7 +47,7 @@ class RoleAccessController extends Controller
         $search=trim((string)$request->query('search','')); $status=(string)$request->query('status',''); $role=(string)$request->query('role','');
         $users=collect($this->users($request)); $totalUsers=$users->count();
         if($search!==''){ $needle=mb_strtolower($search); $users=$users->filter(fn($u)=>str_contains(mb_strtolower(implode(' ',$u)),$needle)); }
-        if(in_array($status,['Active','Pending'],true)) $users=$users->where('status',$status); else $status='';
+        if(in_array($status,['Active','Nonactive'],true)) $users=$users->where('status',$status); else $status='';
         if(in_array($role,self::ACCESS_TYPES,true)) $users=$users->where('role',$role); else $role='';
         return view('role-access', array_merge($this->authViewData($request),[
             'users'=>$users->values()->all(),'totalUsers'=>$totalUsers,'accessTypes'=>self::ACCESS_TYPES,'filters'=>compact('search','status','role')
@@ -81,10 +81,26 @@ class RoleAccessController extends Controller
     {
         if (! $request->session()->has('sigma_auth')) return redirect()->route('login');
         $existing=collect($this->users($request))->firstWhere('identity',$identity); abort_if(! $existing,404,'Data Role/Access tidak ditemukan.');
-        $data=$this->validateData($request);
+        $data=$this->validateData($request, false);
+        $data['status'] = $existing['status'];
         if($data['identity']!==$identity && collect($this->users($request))->contains('identity',$data['identity'])) return back()->withErrors(['identity'=>'Identitas sudah digunakan.'])->withInput();
         $updates=$request->session()->get('sigma_role_access_updates',[]); $updates[$identity]=$data; $request->session()->put('sigma_role_access_updates',$updates);
         return redirect()->route('role-access.index')->with('success','Data Role/Access berhasil diubah.');
+    }
+
+    public function updateStatus(Request $request, string $identity): RedirectResponse
+    {
+        if (! $request->session()->has('sigma_auth')) return redirect()->route('login');
+        $existing = collect($this->users($request))->firstWhere('identity', $identity);
+        abort_if(! $existing, 404, 'Data Role/Access tidak ditemukan.');
+
+        $validated = $request->validate(['status' => ['required', 'in:Active,Nonactive']]);
+        $existing['status'] = $validated['status'];
+        $updates = $request->session()->get('sigma_role_access_updates', []);
+        $updates[$identity] = $existing;
+        $request->session()->put('sigma_role_access_updates', $updates);
+
+        return back()->with('success', 'Status Role/Access berhasil diubah menjadi '.$validated['status'].'.');
     }
 
     public function destroy(Request $request, string $identity): RedirectResponse
@@ -99,11 +115,15 @@ class RoleAccessController extends Controller
         return redirect()->route('role-access.index')->with('success', 'Data Role/Access berhasil dihapus.');
     }
 
-    private function validateData(Request $request): array
+    private function validateData(Request $request, bool $withStatus = true): array
     {
-        return $request->validate([
-            'name'=>['required','string','max:100'],'identity'=>['required','string','max:30'],
-            'role'=>['required','in:'.implode(',',self::ACCESS_TYPES)],'gate'=>['required','in:All Gate,Gate 1,Gate 2,Gate 3'],'status'=>['required','in:Active,Pending'],
-        ]);
+        $rules = [
+            'name'=>['required','string','max:100'],
+            'identity'=>['required','string','max:30'],
+            'role'=>['required','in:'.implode(',',self::ACCESS_TYPES)],
+            'gate'=>['required','in:All Gate,Gate 1,Gate 2,Gate 3'],
+        ];
+        if ($withStatus) $rules['status'] = ['required','in:Active,Nonactive'];
+        return $request->validate($rules);
     }
 }

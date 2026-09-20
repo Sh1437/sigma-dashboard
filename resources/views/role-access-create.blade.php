@@ -219,7 +219,7 @@
               <label class="text-[10px] font-extrabold text-[#526987] md:col-span-2">Status
                 <select name="status" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
                   <option value="Active" @selected(old('status', 'Active') === 'Active')>Active</option>
-                  <option value="Pending" @selected(old('status', 'Active') === 'Pending')>Pending</option>
+                  <option value="Nonactive" @selected(old('status', 'Active') === 'Nonactive')>Nonactive</option>
                 </select>
               </label>
               <div class="flex justify-end gap-3 border-t border-[#e6ecf4] pt-5 md:col-span-2">

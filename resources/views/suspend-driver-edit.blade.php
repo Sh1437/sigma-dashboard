@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIGMA Dashboard</title>
+  <title>Suspend Driver - SIGMA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@
 
       <nav class="h-[calc(100vh-78px)] overflow-y-auto px-[10px] pb-6 pt-[10px] sidebar-scroll">
         <div class="section-label">UTAMA</div>
-        <a class="nav-item active" href="{{ route('dashboard') }}"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+        <a class="nav-item" href="{{ route('dashboard') }}"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
 
         <div class="section-label mt-[14px]">REGISTRASI</div>
         <a class="nav-item" href="#"><i data-lucide="file-plus-2"></i><span>KR Barang Masuk</span></a>
@@ -102,7 +102,7 @@
 
         <div class="section-label mt-[14px]">MASTER & APPROVAL</div>
         <a class="nav-item" href="#"><i data-lucide="database"></i><span>Kolom Input Data</span></a>
-        <a class="nav-item" href="{{ route('suspend-driver.index') }}"><i data-lucide="user-x"></i><span>Suspend Driver</span></a>
+        <a class="nav-item active" href="{{ route('suspend-driver.index') }}"><i data-lucide="user-x"></i><span>Suspend Driver</span></a>
         <a class="nav-item" href="{{ route('blacklist-driver.index') }}"><i data-lucide="ban"></i><span>Blacklist Driver</span></a>
         <a class="nav-item" href="{{ route('user-management.index') }}"><i data-lucide="users"></i><span>User Management</span></a>
         <a class="nav-item" href="{{ route('role-access.index') }}"><i data-lucide="shield-check"></i><span>Role/Access Management</span></a>
@@ -186,133 +186,58 @@
 
     <!-- Main -->
     <main id="main" class="ml-[258px] min-h-screen pt-[64px] transition-all duration-300">
-      <div class="min-h-[calc(100vh-64px)] px-[26px] pb-[82px] pt-[24px]">
-        <section>
-          <h1 class="text-[24px] font-extrabold leading-none tracking-[-.025em] text-[#071d43]">Selamat datang, <span id="welcomeName">{{ $operator }}</span></h1>
-          <p class="mt-[9px] text-[12px] font-medium text-[#7c90b1]">{{ $dateLabel }}</p>
-        </section>
-
-        <!-- Stats -->
-        <section class="mt-[24px] grid grid-cols-1 gap-[13px] sm:grid-cols-2 xl:grid-cols-5">
-          <article class="stat-card">
-            <div><p class="stat-title">Total Transaksi</p><p class="stat-value">128</p></div>
-            <div class="stat-icon bg-[#edf5ff] text-[#2371e8]"><i data-lucide="layers-3"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Barang Masuk</p><p class="stat-value">72</p></div>
-            <div class="stat-icon bg-[#eafbf4] text-[#13a46b]"><i data-lucide="arrow-down-to-line"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Barang Keluar</p><p class="stat-value">41</p></div>
-            <div class="stat-icon bg-[#fff1f1] text-[#ef4444]"><i data-lucide="arrow-up-to-line"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Movement</p><p class="stat-value">09</p></div>
-            <div class="stat-icon bg-[#e4f8fb] text-[#008ca1]"><i data-lucide="route"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Request Pending</p><p class="stat-value">06</p></div>
-            <div class="stat-icon bg-[#fff5e9] text-[#f16b16]"><i data-lucide="clock-3"></i></div>
-          </article>
-        </section>
-
-        <section class="mt-[16px] grid grid-cols-1 gap-[16px] xl:grid-cols-[2.05fr_1fr]">
-          <!-- Today table -->
-          <article class="panel min-h-[284px]">
-            <div class="flex items-start justify-between">
-              <div>
-                <h2 class="panel-title">SIGMA TODAY</h2>
-                <p class="panel-subtitle">Transaksi kendaraan aktif hari ini</p>
+      <div class="role-access-page min-h-[calc(100vh-64px)] bg-[#f4f7fb] px-[26px] pb-8 pt-[25px]">
+        <div class="mx-auto max-w-[920px]">
+          <a href="{{ route('suspend-driver.index') }}" class="mb-4 inline-flex items-center gap-2 text-[11px] font-bold text-[#647b9d]"><i data-lucide="arrow-left" class="h-4 w-4"></i>Kembali ke Suspend Driver</a>
+          <div class="role-access-card rounded-[14px] border border-[#dce5f0] bg-white p-6 shadow-sm">
+            <div class="border-b border-[#e6ecf4] pb-5">
+              <h1 class="role-page-title text-[22px] font-extrabold text-[#071d43]">Ubah Data Suspend Driver</h1>
+              <p class="role-page-subtitle mt-1 text-[11px] text-[#7c90b1]">Perbarui identitas, role, gate, atau status access.</p>
+            </div>
+            @if ($errors->any())
+              <div class="mt-5 rounded-[9px] border border-red-200 bg-red-50 p-3 text-[11px] text-red-700">{{ $errors->first() }}</div>
+            @endif
+            <form method="POST" action="{{ route('suspend-driver.update', $user['identity']) }}" class="mt-6 grid grid-cols-1 gap-5 md:grid-cols-2">
+              @csrf
+              @method('PUT')
+              <label class="text-[10px] font-extrabold text-[#526987]">Nama
+                <input name="name" value="{{ old('name', $user['name']) }}" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
+              </label>
+              <label class="text-[10px] font-extrabold text-[#526987]">Identitas
+                <input name="identity" value="{{ old('identity', $user['identity']) }}" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
+              </label>
+              <label class="text-[10px] font-extrabold text-[#526987]">Role / Kategori
+                <select id="accessRole" name="role" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
+                  @foreach($roles as $roleOption)<option value="{{ $roleOption }}" @selected(old('role', $user['role']) === $roleOption)>{{ $roleOption }}</option>@endforeach
+                </select>
+              </label>
+              <label class="text-[10px] font-extrabold text-[#526987]">Gate
+                <select id="accessGate" name="gate" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
+                  @foreach(['All Gate','Gate 1','Gate 2','Gate 3'] as $gate)<option value="{{ $gate }}" @selected(old('gate', $user['gate']) === $gate)>{{ $gate }}</option>@endforeach
+                </select>
+              </label>
+              <label class="text-[10px] font-extrabold text-[#526987] md:col-span-2">Status
+                <select name="status" class="form-control mt-2 h-[42px] w-full rounded-[8px] border border-[#d7e0ec] bg-white px-3 text-[11px]" required>
+                  <option value="Available" @selected(old('status', $user['status']) === 'Available')>Available</option>
+                  <option value="Pending" @selected(old('status', $user['status']) === 'Pending')>Pending</option>
+                </select>
+              </label>
+              <div class="flex justify-end gap-3 border-t border-[#e6ecf4] pt-5 md:col-span-2">
+                <a href="{{ route('suspend-driver.index') }}" class="inline-flex h-[40px] items-center rounded-[8px] border border-[#d5dfec] px-5 text-[11px] font-extrabold text-[#526987]">Batal</a>
+                <button type="submit" class="inline-flex h-[40px] items-center gap-2 rounded-[8px] bg-[#246edb] px-5 text-[11px] font-extrabold text-white hover:bg-[#1e62c6]"><i data-lucide="save" class="h-4 w-4"></i>Simpan Perubahan</button>
               </div>
-              <a href="#" class="mt-[3px] text-[11px] font-extrabold text-[#1f64d0]">Lihat semua</a>
-            </div>
-
-            <div class="mt-[13px] overflow-x-auto">
-              <table class="w-full min-w-[700px] table-fixed text-left">
-                <thead>
-                  <tr class="h-[28px] bg-[#f5f7fb] text-[9px] font-extrabold tracking-[.04em] text-[#5f7397]">
-                    <th class="w-[21%] px-[12px]">NO. KR</th>
-                    <th class="w-[23%] px-[12px]">KENDARAAN</th>
-                    <th class="w-[16%] px-[12px]">DRIVER</th>
-                    <th class="w-[17%] px-[12px]">GATE IN</th>
-                    <th class="px-[12px]">STATUS</th>
-                  </tr>
-                </thead>
-                <tbody class="text-[10px] text-[#2b4268]">
-                  <tr class="h-[38px] border-b border-[#e7ecf4]">
-                    <td class="px-[12px] font-extrabold text-[#0c2a58]">KR-00125</td>
-                    <td class="px-[12px]">B 1234 XX</td>
-                    <td class="px-[12px]">Ahmad</td>
-                    <td class="px-[12px]">Gate 2</td>
-                    <td class="px-[12px]"><span class="badge bg-[#dcecff] text-[#1761c3]">INSIDE</span></td>
-                  </tr>
-                  <tr class="h-[38px] border-b border-[#e7ecf4]">
-                    <td class="px-[12px] font-extrabold text-[#0c2a58]">KR-00126</td>
-                    <td class="px-[12px]">B 9876 YY</td>
-                    <td class="px-[12px]">Siti</td>
-                    <td class="px-[12px]">Gate 1</td>
-                    <td class="px-[12px]"><span class="badge bg-[#ffebd0] text-[#d45a00]">PENDING</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </article>
-
-          <!-- Quick access -->
-          <article class="panel min-h-[284px]">
-            <h2 class="panel-title">Akses Cepat</h2>
-            <p class="panel-subtitle">Operasi paling sering digunakan</p>
-            <div class="mt-[14px] space-y-[8px]">
-              <a href="#" class="quick-row">
-                <span class="quick-icon bg-[#edf5ff] text-[#216fe1]"><i data-lucide="file-plus-2"></i></span>
-                <span>Registrasi Baru</span>
-                <i data-lucide="chevron-right" class="ml-auto h-[16px] w-[16px] text-[#90a1bc]"></i>
-              </a>
-              <a href="#" class="quick-row">
-                <span class="quick-icon bg-[#fff4e9] text-[#f27720]"><i data-lucide="clipboard-list"></i></span>
-                <span>Request Pending</span>
-                <i data-lucide="chevron-right" class="ml-auto h-[16px] w-[16px] text-[#90a1bc]"></i>
-              </a>
-              <a href="#" class="quick-row">
-                <span class="quick-icon bg-[#e7f9fb] text-[#009eb6]"><i data-lucide="qr-code"></i></span>
-                <span>Scan QR Keluar</span>
-                <i data-lucide="chevron-right" class="ml-auto h-[16px] w-[16px] text-[#90a1bc]"></i>
-              </a>
-            </div>
-          </article>
-        </section>
-
-        <section class="mt-[16px] grid grid-cols-1 gap-[16px] xl:grid-cols-2">
-          <article class="panel min-h-[138px]">
-            <h2 class="panel-title">MOVEMENT / KR NGEPOK JETTY</h2>
-            <div class="mt-[10px] divide-y divide-[#e8edf5] text-[10px] text-[#21395f]">
-              <div class="flex h-[39px] items-center justify-between">
-                <div><span class="font-extrabold text-[#082653]">KR-00120</span><span class="mx-1">·</span>B 7788 DD</div>
-                <span class="badge bg-[#dcf6fa] text-[#008ca3]">→ JETTY</span>
-              </div>
-              <div class="flex h-[39px] items-center justify-between">
-                <div><span class="font-extrabold text-[#082653]">KR-00111</span><span class="mx-1">·</span>B 4521 ZZ</div>
-                <span class="badge bg-[#eee1ff] text-[#7a38cf]">AT JETTY</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="panel min-h-[138px]">
-            <h2 class="panel-title">AKTIVITAS TERBARU</h2>
-            <div class="mt-[11px] space-y-[10px] text-[10px] text-[#536b91]">
-              <p><span class="font-extrabold text-[#0a2856]">Gate 2</span> Clock In KR-00125 <span class="text-[#8da0bd]">· 08:12</span></p>
-              <p><span class="font-extrabold text-[#0a2856]">Gate 1</span> Validasi request KR-00126 <span class="text-[#8da0bd]">· 07:55</span></p>
-              <p><span class="font-extrabold text-[#0a2856]">Gate 4</span> Movement menuju Jetty <span class="text-[#8da0bd]">· 07:42</span></p>
-            </div>
-          </article>
-        </section>
-
-        <footer class="mt-[142px] flex justify-center pb-[10px]">
-          <img src="{{ asset('images/krakatau-posco.png') }}" alt="Krakatau Posco" class="h-[28px] w-auto object-contain" />
-        </footer>
+            </form>
+          </div>
+        </div>
       </div>
     </main>
   </div>
-  <script src="{{ asset('js/app.js') }}" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const role = document.getElementById('accessRole'), gate = document.getElementById('accessGate');
+      const syncGate = () => { const map={'Super Admin':'All Gate','Admin Gate 1':'Gate 1','Admin Gate 2':'Gate 2','Admin Gate 3':'Gate 3'}; if(map[role.value]) gate.value=map[role.value]; };
+      role?.addEventListener('change', syncGate);
+    });
+  </script>
 </body>
 </html>

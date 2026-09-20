@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SIGMA Dashboard</title>
+  <title>Role/Access Management - SIGMA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@
 
       <nav class="h-[calc(100vh-78px)] overflow-y-auto px-[10px] pb-6 pt-[10px] sidebar-scroll">
         <div class="section-label">UTAMA</div>
-        <a class="nav-item active" href="{{ route('dashboard') }}"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
+        <a class="nav-item" href="{{ route('dashboard') }}"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
 
         <div class="section-label mt-[14px]">REGISTRASI</div>
         <a class="nav-item" href="#"><i data-lucide="file-plus-2"></i><span>KR Barang Masuk</span></a>
@@ -105,7 +105,7 @@
         <a class="nav-item" href="{{ route('suspend-driver.index') }}"><i data-lucide="user-x"></i><span>Suspend Driver</span></a>
         <a class="nav-item" href="{{ route('blacklist-driver.index') }}"><i data-lucide="ban"></i><span>Blacklist Driver</span></a>
         <a class="nav-item" href="{{ route('user-management.index') }}"><i data-lucide="users"></i><span>User Management</span></a>
-        <a class="nav-item" href="{{ route('role-access.index') }}"><i data-lucide="shield-check"></i><span>Role/Access Management</span></a>
+        <a class="nav-item active" href="{{ route('role-access.index') }}"><i data-lucide="shield-check"></i><span>Role/Access Management</span></a>
       </nav>
     </aside>
 
@@ -186,133 +186,114 @@
 
     <!-- Main -->
     <main id="main" class="ml-[258px] min-h-screen pt-[64px] transition-all duration-300">
-      <div class="min-h-[calc(100vh-64px)] px-[26px] pb-[82px] pt-[24px]">
-        <section>
-          <h1 class="text-[24px] font-extrabold leading-none tracking-[-.025em] text-[#071d43]">Selamat datang, <span id="welcomeName">{{ $operator }}</span></h1>
-          <p class="mt-[9px] text-[12px] font-medium text-[#7c90b1]">{{ $dateLabel }}</p>
-        </section>
+      <div class="role-access-page min-h-[calc(100vh-64px)] bg-[#f4f7fb] px-[26px] pb-4 pt-[25px]">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h1 class="role-page-title text-[23px] font-extrabold tracking-[-.03em] text-[#071d43]">Role/Access Management</h1>
+            <p class="role-page-subtitle mt-1 text-[11px] font-medium text-[#7c90b1]">Kelola akses dan kontrol operasional SIGMA.</p>
+          </div>
+          <a href="{{ route('role-access.create') }}" class="inline-flex h-[42px] items-center gap-2 rounded-[9px] bg-[#246edb] px-5 text-[11px] font-extrabold text-white shadow-sm transition hover:bg-[#1e62c6]">
+            <i data-lucide="plus" class="h-[18px] w-[18px]"></i><span>Tambah</span>
+          </a>
+        </div>
 
-        <!-- Stats -->
-        <section class="mt-[24px] grid grid-cols-1 gap-[13px] sm:grid-cols-2 xl:grid-cols-5">
-          <article class="stat-card">
-            <div><p class="stat-title">Total Transaksi</p><p class="stat-value">128</p></div>
-            <div class="stat-icon bg-[#edf5ff] text-[#2371e8]"><i data-lucide="layers-3"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Barang Masuk</p><p class="stat-value">72</p></div>
-            <div class="stat-icon bg-[#eafbf4] text-[#13a46b]"><i data-lucide="arrow-down-to-line"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Barang Keluar</p><p class="stat-value">41</p></div>
-            <div class="stat-icon bg-[#fff1f1] text-[#ef4444]"><i data-lucide="arrow-up-to-line"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Movement</p><p class="stat-value">09</p></div>
-            <div class="stat-icon bg-[#e4f8fb] text-[#008ca1]"><i data-lucide="route"></i></div>
-          </article>
-          <article class="stat-card">
-            <div><p class="stat-title">Request Pending</p><p class="stat-value">06</p></div>
-            <div class="stat-icon bg-[#fff5e9] text-[#f16b16]"><i data-lucide="clock-3"></i></div>
-          </article>
-        </section>
-
-        <section class="mt-[16px] grid grid-cols-1 gap-[16px] xl:grid-cols-[2.05fr_1fr]">
-          <!-- Today table -->
-          <article class="panel min-h-[284px]">
-            <div class="flex items-start justify-between">
-              <div>
-                <h2 class="panel-title">SIGMA TODAY</h2>
-                <p class="panel-subtitle">Transaksi kendaraan aktif hari ini</p>
-              </div>
-              <a href="#" class="mt-[3px] text-[11px] font-extrabold text-[#1f64d0]">Lihat semua</a>
+        <section class="mt-[20px] overflow-hidden rounded-[12px] border border-[#dce5f0] bg-white shadow-[0_1px_2px_rgba(20,45,82,.03)] role-access-card">
+          <form method="GET" action="{{ route('role-access.index') }}" class="flex flex-wrap items-center gap-2 border-b border-[#dce5f0] p-[12px] role-filter-form">
+            <div class="relative w-full sm:w-[230px]">
+              <i data-lucide="search" class="pointer-events-none absolute left-3 top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[#8ca0be]"></i>
+              <input id="roleSearch" name="search" value="{{ $filters['search'] }}" type="search" placeholder="Cari nama, identitas, role, gate..." class="form-control h-[36px] w-full rounded-[7px] border border-[#d7e0ec] bg-white pl-9 pr-3 text-[11px] text-[#071d43] outline-none" />
             </div>
 
-            <div class="mt-[13px] overflow-x-auto">
-              <table class="w-full min-w-[700px] table-fixed text-left">
-                <thead>
-                  <tr class="h-[28px] bg-[#f5f7fb] text-[9px] font-extrabold tracking-[.04em] text-[#5f7397]">
-                    <th class="w-[21%] px-[12px]">NO. KR</th>
-                    <th class="w-[23%] px-[12px]">KENDARAAN</th>
-                    <th class="w-[16%] px-[12px]">DRIVER</th>
-                    <th class="w-[17%] px-[12px]">GATE IN</th>
-                    <th class="px-[12px]">STATUS</th>
+            <select id="roleStatus" name="status" class="form-control h-[36px] w-full rounded-[7px] border border-[#d7e0ec] bg-white px-3 text-[11px] font-medium text-[#526987] outline-none sm:w-[150px]">
+              <option value="">Semua Status</option>
+              <option value="Active" @selected($filters['status'] === 'Active')>Active</option>
+              <option value="Pending" @selected($filters['status'] === 'Pending')>Pending</option>
+            </select>
+
+            <select id="roleType" name="role" class="form-control h-[36px] w-full rounded-[7px] border border-[#d7e0ec] bg-white px-3 text-[11px] font-medium text-[#526987] outline-none sm:w-[170px]">
+              <option value="">Semua Access</option>
+              @foreach ($accessTypes as $accessType)
+                <option value="{{ $accessType }}" @selected($filters['role'] === $accessType)>{{ $accessType }}</option>
+              @endforeach
+            </select>
+
+            <button type="submit" class="h-[36px] rounded-[7px] border border-[#cfd9e7] bg-white px-4 text-[11px] font-extrabold text-[#0b2553] transition hover:bg-[#f4f7fb]">Filter</button>
+
+            @if ($filters['search'] || $filters['status'] || $filters['role'])
+              <a href="{{ route('role-access.index') }}" class="inline-flex h-[36px] items-center rounded-[7px] px-3 text-[10px] font-bold text-[#6f84a5] hover:bg-[#f4f7fb]">Reset</a>
+            @endif
+          </form>
+
+          <div class="overflow-x-auto">
+            <table class="w-full min-w-[900px] border-collapse text-left">
+              <thead>
+                <tr class="h-[32px] bg-[#f7f9fc] text-[9px] font-extrabold uppercase tracking-[.06em] text-[#637b9f]">
+                  <th class="px-[12px]">Nama</th><th class="px-[12px]">Identitas</th><th class="px-[12px]">Role / Kategori</th><th class="px-[12px]">Gate</th><th class="px-[12px]">Status</th><th class="px-[12px]">Aksi</th>
+                </tr>
+              </thead>
+              <tbody class="role-access-tbody text-[11px] text-[#30496e]">
+                @forelse ($users as $user)
+                  <tr class="h-[52px] border-t border-[#e6ecf4]">
+                    <td class="px-[12px] font-semibold">{{ $user['name'] }}</td>
+                    <td class="px-[12px]">{{ $user['identity'] }}</td>
+                    <td class="px-[12px] font-semibold">{{ $user['role'] }}</td>
+                    <td class="px-[12px]">{{ $user['gate'] }}</td>
+                    <td class="px-[12px]">
+                      <span class="badge {{ $user['status'] === 'Active' ? 'bg-[#dff3ff] text-[#0575a8]' : 'bg-[#fff0d9] text-[#e46a00]' }}">{{ strtoupper($user['status']) }}</span>
+                    </td>
+                    <td class="px-[12px]">
+                      <button type="button" class="role-detail-btn rounded-[7px] border border-[#d5dfec] px-3 py-2 text-[10px] font-extrabold text-[#0b2553] hover:bg-[#f7f9fc]" data-user='@json($user)'>Detail</button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody class="text-[10px] text-[#2b4268]">
-                  <tr class="h-[38px] border-b border-[#e7ecf4]">
-                    <td class="px-[12px] font-extrabold text-[#0c2a58]">KR-00125</td>
-                    <td class="px-[12px]">B 1234 XX</td>
-                    <td class="px-[12px]">Ahmad</td>
-                    <td class="px-[12px]">Gate 2</td>
-                    <td class="px-[12px]"><span class="badge bg-[#dcecff] text-[#1761c3]">INSIDE</span></td>
-                  </tr>
-                  <tr class="h-[38px] border-b border-[#e7ecf4]">
-                    <td class="px-[12px] font-extrabold text-[#0c2a58]">KR-00126</td>
-                    <td class="px-[12px]">B 9876 YY</td>
-                    <td class="px-[12px]">Siti</td>
-                    <td class="px-[12px]">Gate 1</td>
-                    <td class="px-[12px]"><span class="badge bg-[#ffebd0] text-[#d45a00]">PENDING</span></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </article>
+                @empty
+                  <tr><td colspan="6" class="px-4 py-12 text-center text-[12px] font-semibold text-[#8295b3]">Data tidak ditemukan. Ubah kata pencarian atau filter.</td></tr>
+                @endforelse
+              </tbody>
+            </table>
+          </div>
 
-          <!-- Quick access -->
-          <article class="panel min-h-[284px]">
-            <h2 class="panel-title">Akses Cepat</h2>
-            <p class="panel-subtitle">Operasi paling sering digunakan</p>
-            <div class="mt-[14px] space-y-[8px]">
-              <a href="#" class="quick-row">
-                <span class="quick-icon bg-[#edf5ff] text-[#216fe1]"><i data-lucide="file-plus-2"></i></span>
-                <span>Registrasi Baru</span>
-                <i data-lucide="chevron-right" class="ml-auto h-[16px] w-[16px] text-[#90a1bc]"></i>
-              </a>
-              <a href="#" class="quick-row">
-                <span class="quick-icon bg-[#fff4e9] text-[#f27720]"><i data-lucide="clipboard-list"></i></span>
-                <span>Request Pending</span>
-                <i data-lucide="chevron-right" class="ml-auto h-[16px] w-[16px] text-[#90a1bc]"></i>
-              </a>
-              <a href="#" class="quick-row">
-                <span class="quick-icon bg-[#e7f9fb] text-[#009eb6]"><i data-lucide="qr-code"></i></span>
-                <span>Scan QR Keluar</span>
-                <i data-lucide="chevron-right" class="ml-auto h-[16px] w-[16px] text-[#90a1bc]"></i>
-              </a>
-            </div>
-          </article>
+          <div class="role-access-summary flex items-center justify-between border-t border-[#e6ecf4] px-4 py-3 text-[10px] text-[#7d90ae]">
+            <span>Menampilkan {{ count($users) }} dari {{ $totalUsers }} data</span>
+            <span>Filter aktif: {{ ($filters['search'] || $filters['status'] || $filters['role']) ? 'Ya' : 'Tidak' }}</span>
+          </div>
         </section>
 
-        <section class="mt-[16px] grid grid-cols-1 gap-[16px] xl:grid-cols-2">
-          <article class="panel min-h-[138px]">
-            <h2 class="panel-title">MOVEMENT / KR NGEPOK JETTY</h2>
-            <div class="mt-[10px] divide-y divide-[#e8edf5] text-[10px] text-[#21395f]">
-              <div class="flex h-[39px] items-center justify-between">
-                <div><span class="font-extrabold text-[#082653]">KR-00120</span><span class="mx-1">·</span>B 7788 DD</div>
-                <span class="badge bg-[#dcf6fa] text-[#008ca3]">→ JETTY</span>
-              </div>
-              <div class="flex h-[39px] items-center justify-between">
-                <div><span class="font-extrabold text-[#082653]">KR-00111</span><span class="mx-1">·</span>B 4521 ZZ</div>
-                <span class="badge bg-[#eee1ff] text-[#7a38cf]">AT JETTY</span>
-              </div>
-            </div>
-          </article>
-
-          <article class="panel min-h-[138px]">
-            <h2 class="panel-title">AKTIVITAS TERBARU</h2>
-            <div class="mt-[11px] space-y-[10px] text-[10px] text-[#536b91]">
-              <p><span class="font-extrabold text-[#0a2856]">Gate 2</span> Clock In KR-00125 <span class="text-[#8da0bd]">· 08:12</span></p>
-              <p><span class="font-extrabold text-[#0a2856]">Gate 1</span> Validasi request KR-00126 <span class="text-[#8da0bd]">· 07:55</span></p>
-              <p><span class="font-extrabold text-[#0a2856]">Gate 4</span> Movement menuju Jetty <span class="text-[#8da0bd]">· 07:42</span></p>
-            </div>
-          </article>
-        </section>
-
-        <footer class="mt-[142px] flex justify-center pb-[10px]">
+        <footer class="mt-[calc(100vh-470px)] flex justify-center pb-[10px]">
           <img src="{{ asset('images/krakatau-posco.png') }}" alt="Krakatau Posco" class="h-[28px] w-auto object-contain" />
         </footer>
       </div>
+
+      <div id="roleModal" class="fixed inset-0 z-[80] hidden items-center justify-center bg-[#061225]/60 p-4 backdrop-blur-[2px]">
+        <div class="w-full max-w-[480px] rounded-[14px] border border-[#dce5f0] bg-white p-5 shadow-2xl role-modal-card">
+          <div class="flex items-center justify-between"><div><h2 id="roleModalTitle" class="text-[16px] font-extrabold text-[#071d43]">Tambah Access</h2><p class="mt-1 text-[10px] text-[#8194b2]">Demo frontend. Hubungkan ke database saat backend siap.</p></div><button id="closeRoleModal" type="button" class="rounded-lg p-2 text-[#7186a6] hover:bg-slate-100"><i data-lucide="x" class="h-5 w-5"></i></button></div>
+          <div id="roleModalBody" class="mt-5"></div>
+        </div>
+      </div>
     </main>
   </div>
-  <script src="{{ asset('js/app.js') }}" defer></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const modal = document.getElementById('roleModal');
+      const title = document.getElementById('roleModalTitle');
+      const body = document.getElementById('roleModalBody');
+      const open = () => { modal?.classList.remove('hidden'); modal?.classList.add('flex'); };
+      const close = () => { modal?.classList.add('hidden'); modal?.classList.remove('flex'); };
+      document.getElementById('closeRoleModal')?.addEventListener('click', close);
+      modal?.addEventListener('click', e => { if (e.target === modal) close(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+      document.querySelectorAll('.role-detail-btn').forEach(btn => btn.addEventListener('click', () => {
+        const u = JSON.parse(btn.dataset.user);
+        title.textContent = 'Detail Access';
+        body.innerHTML = `<div class="grid grid-cols-2 gap-3 text-[11px]">
+          <div class="rounded-lg bg-slate-50 p-3"><div class="text-[9px] font-bold text-slate-400">NAMA</div><div class="mt-1 font-extrabold text-[#071d43]">${u.name}</div></div>
+          <div class="rounded-lg bg-slate-50 p-3"><div class="text-[9px] font-bold text-slate-400">IDENTITAS</div><div class="mt-1 font-extrabold text-[#071d43]">${u.identity}</div></div>
+          <div class="rounded-lg bg-slate-50 p-3"><div class="text-[9px] font-bold text-slate-400">ACCESS</div><div class="mt-1 font-extrabold text-[#071d43]">${u.role}</div></div>
+          <div class="rounded-lg bg-slate-50 p-3"><div class="text-[9px] font-bold text-slate-400">GATE</div><div class="mt-1 font-extrabold text-[#071d43]">${u.gate}</div></div>
+          <div class="col-span-2 rounded-lg bg-slate-50 p-3"><div class="text-[9px] font-bold text-slate-400">STATUS</div><div class="mt-1 font-extrabold text-[#071d43]">${u.status}</div></div>
+        </div><a href="{{ url('/role-access-management') }}/${encodeURIComponent(u.identity)}/edit" class="mt-4 inline-flex h-[40px] w-full items-center justify-center gap-2 rounded-[8px] bg-[#246edb] text-[11px] font-extrabold text-white hover:bg-[#1e62c6]"><span>Ubah Data</span></a><form method="POST" action="{{ url('/role-access-management') }}/${encodeURIComponent(u.identity)}" class="mt-2" onsubmit="return confirm('Yakin ingin menghapus data ' + u.name + ' (' + u.identity + ')? Data yang dihapus tidak dapat dikembalikan.');">{{ csrf_field() }}{{ method_field('DELETE') }}<button type="submit" class="inline-flex h-[38px] w-full items-center justify-center gap-2 rounded-[8px] border border-red-200 bg-red-50 px-4 text-[11px] font-extrabold text-red-600 hover:bg-red-100"><span>Hapus Data</span></button></form>`;
+        open();
+      }));
+    });
+  </script>
 </body>
 </html>

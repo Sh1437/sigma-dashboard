@@ -1,0 +1,6 @@
+// Tambahkan import ini di routes/web.php
+use App\Http\Controllers\RoleAccessController;
+
+// Tambahkan route ini bersama route dashboard
+Route::get('/role-access-management', [RoleAccessController::class, 'index'])
+    ->name('role-access.index');

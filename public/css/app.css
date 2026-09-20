@@ -923,3 +923,92 @@ html.dark #sidebar.sidebar-collapsed .sigma-sidebar-icon-dark {
   box-shadow: none !important;
   filter: none !important;
 }
+
+/* ROLE / ACCESS MANAGEMENT */
+html.dark .role-access-card,
+html.dark .role-modal-card {
+  background: #0d1b2f !important;
+  border-color: #22324a !important;
+}
+html.dark .role-filter-form { border-color: #22324a !important; }
+html.dark .role-detail-btn {
+  border-color: #2a3c57 !important;
+  color: #eef4ff !important;
+}
+html.dark .role-detail-btn:hover { background: #152943 !important; }
+
+
+/* =========================================================
+   ROLE / ACCESS MANAGEMENT - LIGHT / DARK THEME FIX
+   ========================================================= */
+.role-access-page {
+  background: #f4f7fb !important;
+  color: #071d43;
+  transition: background-color .18s ease, color .18s ease;
+}
+.role-access-card {
+  background: #ffffff !important;
+  border-color: #dce5f0 !important;
+}
+.role-filter-form { border-color: #dce5f0 !important; }
+.role-access-tbody { color: #30496e; }
+.role-access-summary {
+  color: #7d90ae;
+  border-color: #e6ecf4 !important;
+}
+
+html.dark .role-access-page {
+  background: #081426 !important;
+  color: #e6edf8 !important;
+}
+html.dark .role-page-title { color: #eef4ff !important; }
+html.dark .role-page-subtitle { color: #93a4bd !important; }
+html.dark .role-access-card,
+html.dark .role-modal-card {
+  background: #0d1b2f !important;
+  border-color: #22324a !important;
+}
+html.dark .role-filter-form { border-color: #22324a !important; }
+html.dark .role-access-card table thead tr {
+  background: #12233a !important;
+  color: #9fb1ca !important;
+}
+html.dark .role-access-card table tbody,
+html.dark .role-access-card table tbody tr,
+html.dark .role-access-card table tbody td {
+  color: #d6e1f0 !important;
+  border-color: #22324a !important;
+  background: transparent !important;
+}
+html.dark .role-access-card table tbody td.font-semibold {
+  color: #eef4ff !important;
+}
+html.dark .role-access-summary {
+  color: #91a4bf !important;
+  border-color: #22324a !important;
+}
+html.dark .role-filter-form .form-control {
+  background: #0a1729 !important;
+  border-color: #2a3c57 !important;
+  color: #eef4ff !important;
+}
+html.dark .role-filter-form .form-control::placeholder { color: #71839e !important; }
+html.dark .role-filter-form button[type="submit"] {
+  background: #0f2037 !important;
+  border-color: #2b3d57 !important;
+  color: #eef4ff !important;
+}
+html.dark .role-filter-form button[type="submit"]:hover { background: #152943 !important; }
+html.dark .role-filter-form a { color: #9eb0c9 !important; }
+html.dark .role-filter-form a:hover { background: #152943 !important; }
+html.dark .role-detail-btn {
+  background: #0f2037 !important;
+  border-color: #2a3c57 !important;
+  color: #eef4ff !important;
+}
+html.dark .role-detail-btn:hover { background: #152943 !important; }
+html.dark .role-modal-card h2 { color: #eef4ff !important; }
+html.dark .role-modal-card label { color: #b9c8dc !important; }
+html.dark .role-modal-card .bg-slate-50 { background: #12233a !important; }
+html.dark .role-modal-card .text-\[\#071d43\] { color: #eef4ff !important; }
+html.dark .role-modal-card .text-slate-400 { color: #91a4bf !important; }

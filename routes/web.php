@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\BlacklistDriverController;
 use App\Http\Controllers\SuspendDriverController;
 use App\Http\Controllers\RoleAccessController;
@@ -13,6 +14,10 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/registration', [RegistrationController::class, 'create'])->name('registration.create');
+Route::post('/registration', [RegistrationController::class, 'store'])->name('registration.store');
+Route::post('/registration/master-request', [RegistrationController::class, 'storeMasterRequest'])->name('registration.master-request');
 
 Route::get('/role-access-management', [RoleAccessController::class, 'index'])->name('role-access.index');
 Route::get('/role-access-management/create', [RoleAccessController::class, 'create'])->name('role-access.create');

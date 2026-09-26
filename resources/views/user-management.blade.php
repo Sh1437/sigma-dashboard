@@ -87,7 +87,7 @@
         <a class="nav-item" href="{{ route('dashboard') }}"><i data-lucide="layout-dashboard"></i><span>Dashboard</span></a>
 
         <div class="section-label mt-[14px]">REGISTRASI</div>
-        <a class="nav-item" href="#"><i data-lucide="file-plus-2"></i><span>KR Barang Masuk</span></a>
+        <a class="nav-item" href="{{ route('registration.create') }}"><i data-lucide="file-plus-2"></i><span>KR Barang Masuk</span></a>
         <a class="nav-item" href="#"><i data-lucide="log-out"></i><span>KR Barang Keluar</span></a>
         <a class="nav-item" href="#"><i data-lucide="clipboard-list"></i><span>Request / Pending</span></a>
 

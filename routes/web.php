@@ -3,6 +3,11 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RegistrationController;
+use App\Http\Controllers\KrBarangKeluarController;
+use App\Http\Controllers\RequestPendingController;
+use App\Http\Controllers\AllVehicleController;
+use App\Http\Controllers\SigmaTodayController;
+use App\Http\Controllers\MovementController;
 use App\Http\Controllers\BlacklistDriverController;
 use App\Http\Controllers\SuspendDriverController;
 use App\Http\Controllers\RoleAccessController;
@@ -18,6 +23,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/registration', [RegistrationController::class, 'create'])->name('registration.create');
 Route::post('/registration', [RegistrationController::class, 'store'])->name('registration.store');
 Route::post('/registration/master-request', [RegistrationController::class, 'storeMasterRequest'])->name('registration.master-request');
+Route::get('/kr-barang-keluar', [KrBarangKeluarController::class, 'index'])->name('kr-barang-keluar.index');
+Route::get('/request-pending', [RequestPendingController::class, 'index'])->name('request-pending.index');
+Route::get('/all-vehicle', [AllVehicleController::class, 'index'])->name('all-vehicle.index');
+Route::get('/sigma-today', [SigmaTodayController::class, 'index'])->name('sigma-today.index');
+Route::get('/movement', [MovementController::class, 'index'])->name('movement.index');
 
 Route::get('/role-access-management', [RoleAccessController::class, 'index'])->name('role-access.index');
 Route::get('/role-access-management/create', [RoleAccessController::class, 'create'])->name('role-access.create');

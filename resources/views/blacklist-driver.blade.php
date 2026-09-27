@@ -88,13 +88,13 @@
 
         <div class="section-label mt-[14px]">REGISTRASI</div>
         <a class="nav-item" href="{{ route('registration.create') }}"><i data-lucide="file-plus-2"></i><span>KR Barang Masuk</span></a>
-        <a class="nav-item" href="#"><i data-lucide="log-out"></i><span>KR Barang Keluar</span></a>
+        <a class="nav-item" href="{{ route('kr-barang-keluar.index') }}"><i data-lucide="log-out"></i><span>KR Barang Keluar</span></a>
         <a class="nav-item" href="#"><i data-lucide="clipboard-list"></i><span>Request / Blocked</span></a>
 
         <div class="section-label mt-[14px]">DATA KENDARAAN</div>
-        <a class="nav-item" href="#"><i data-lucide="truck"></i><span>All Vehicle</span></a>
-        <a class="nav-item" href="#"><i data-lucide="calendar-check-2"></i><span>Sigma Today</span></a>
-        <a class="nav-item" href="#"><i data-lucide="route"></i><span>Movement</span></a>
+        <a class="nav-item" href="{{ route('all-vehicle.index') }}"><i data-lucide="truck"></i><span>All Vehicle</span></a>
+        <a class="nav-item" href="{{ route('sigma-today.index') }}"><i data-lucide="calendar-check-2"></i><span>Sigma Today</span></a>
+        <a class="nav-item" href="{{ route('movement.index') }}"><i data-lucide="route"></i><span>Movement</span></a>
 
         <div class="section-label mt-[14px]">REPORT</div>
         <a class="nav-item" href="#"><i data-lucide="file-text"></i><span>Laporan Harian</span></a>

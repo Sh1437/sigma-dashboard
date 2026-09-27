@@ -88,13 +88,13 @@
 
         <div class="section-label mt-[14px]">REGISTRASI</div>
         <a class="nav-item active" href="{{ route('registration.create') }}"><i data-lucide="file-plus-2"></i><span>KR Barang Masuk</span></a>
-        <a class="nav-item" href="#"><i data-lucide="log-out"></i><span>KR Barang Keluar</span></a>
-        <a class="nav-item" href="#"><i data-lucide="clipboard-list"></i><span>Request / Pending</span></a>
+        <a class="nav-item" href="{{ route('kr-barang-keluar.index') }}"><i data-lucide="log-out"></i><span>KR Barang Keluar</span></a>
+        <a class="nav-item" href="{{ route('request-pending.index') }}"><i data-lucide="clipboard-list"></i><span>Request / Pending</span></a>
 
         <div class="section-label mt-[14px]">DATA KENDARAAN</div>
-        <a class="nav-item" href="#"><i data-lucide="truck"></i><span>All Vehicle</span></a>
-        <a class="nav-item" href="#"><i data-lucide="calendar-check-2"></i><span>Sigma Today</span></a>
-        <a class="nav-item" href="#"><i data-lucide="route"></i><span>Movement</span></a>
+        <a class="nav-item" href="{{ route('all-vehicle.index') }}"><i data-lucide="truck"></i><span>All Vehicle</span></a>
+        <a class="nav-item" href="{{ route('sigma-today.index') }}"><i data-lucide="calendar-check-2"></i><span>Sigma Today</span></a>
+        <a class="nav-item" href="{{ route('movement.index') }}"><i data-lucide="route"></i><span>Movement</span></a>
 
         <div class="section-label mt-[14px]">REPORT</div>
         <a class="nav-item" href="#"><i data-lucide="file-text"></i><span>Laporan Harian</span></a>
@@ -190,7 +190,7 @@
         <div class="mx-auto max-w-[1180px]">
           <div class="mb-5 flex items-start justify-between gap-4">
             <div><h1 class="role-page-title text-[24px] font-extrabold text-[#071d43]">Form Registrasi</h1><p class="role-page-subtitle mt-1 text-[12px] text-[#7c90b1]">Input KR Barang Masuk secara bertahap untuk mencegah kesalahan data.</p></div>
-            <a href="#requestItems" class="inline-flex h-[42px] items-center gap-2 rounded-[8px] border border-[#d6e0ed] bg-white px-4 text-[11px] font-extrabold text-[#071d43]"><i data-lucide="clipboard-list" class="h-5 w-5"></i>Request / Pending @if($pendingCount)<span class="rounded-full bg-orange-100 px-2 py-0.5 text-orange-600">{{ $pendingCount }}</span>@endif</a>
+            <a href="{{ route('request-pending.index') }}" class="inline-flex h-[42px] items-center gap-2 rounded-[8px] border border-[#d6e0ed] bg-white px-4 text-[11px] font-extrabold text-[#071d43]"><i data-lucide="clipboard-list" class="h-5 w-5"></i>Request / Pending @if($pendingCount)<span class="rounded-full bg-orange-100 px-2 py-0.5 text-orange-600">{{ $pendingCount }}</span>@endif</a>
           </div>
           @if(session('success'))<div class="mb-4 rounded-[9px] border border-emerald-200 bg-emerald-50 p-3 text-[11px] font-bold text-emerald-700">{{ session('success') }}</div>@endif
           @if($errors->any())<div class="mb-4 rounded-[9px] border border-red-200 bg-red-50 p-3 text-[11px] text-red-700">{{ $errors->first() }}</div>@endif

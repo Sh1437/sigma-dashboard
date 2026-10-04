@@ -8,6 +8,8 @@ use App\Http\Controllers\RequestPendingController;
 use App\Http\Controllers\AllVehicleController;
 use App\Http\Controllers\SigmaTodayController;
 use App\Http\Controllers\MovementController;
+use App\Http\Controllers\DailyReportController;
+use App\Http\Controllers\MonthlyReportController;
 use App\Http\Controllers\BlacklistDriverController;
 use App\Http\Controllers\SuspendDriverController;
 use App\Http\Controllers\RoleAccessController;
@@ -28,6 +30,11 @@ Route::get('/request-pending', [RequestPendingController::class, 'index'])->name
 Route::get('/all-vehicle', [AllVehicleController::class, 'index'])->name('all-vehicle.index');
 Route::get('/sigma-today', [SigmaTodayController::class, 'index'])->name('sigma-today.index');
 Route::get('/movement', [MovementController::class, 'index'])->name('movement.index');
+Route::get('/laporan-harian', [DailyReportController::class, 'index'])->name('daily-report.index');
+Route::post('/laporan-harian', [DailyReportController::class, 'store'])->name('daily-report.store');
+Route::get('/laporan-harian/export', [DailyReportController::class, 'export'])->name('daily-report.export');
+Route::get('/laporan-bulanan', [MonthlyReportController::class, 'index'])->name('monthly-report.index');
+Route::get('/laporan-bulanan/export', [MonthlyReportController::class, 'export'])->name('monthly-report.export');
 
 Route::get('/role-access-management', [RoleAccessController::class, 'index'])->name('role-access.index');
 Route::get('/role-access-management/create', [RoleAccessController::class, 'create'])->name('role-access.create');

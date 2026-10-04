@@ -97,8 +97,8 @@
         <a class="nav-item" href="{{ route('movement.index') }}"><i data-lucide="route"></i><span>Movement</span></a>
 
         <div class="section-label mt-[14px]">REPORT</div>
-        <a class="nav-item" href="#"><i data-lucide="file-text"></i><span>Laporan Harian</span></a>
-        <a class="nav-item" href="#"><i data-lucide="calendar-days"></i><span>Laporan Bulanan</span></a>
+        <a class="nav-item" href="{{ route('daily-report.index') }}"><i data-lucide="file-text"></i><span>Laporan Harian</span></a>
+        <a class="nav-item" href="{{ route('monthly-report.index') }}"><i data-lucide="calendar-days"></i><span>Laporan Bulanan</span></a>
 
         <div class="section-label mt-[14px]">MASTER & APPROVAL</div>
         <a class="nav-item" href="#"><i data-lucide="database"></i><span>Kolom Input Data</span></a>
